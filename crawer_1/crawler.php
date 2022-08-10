@@ -20,6 +20,14 @@ class Crawler {
      */
     private int $depth;
 
+    /**
+     * constructor
+     * 
+     * @param array $urls
+     * @param array $depth
+     *
+     * @return void
+     */
     public function __construct($urls = [], $depth = 3) {
         $this->processedUrls = [];
         $this->urlFrontier = $urls;
@@ -54,7 +62,7 @@ class Crawler {
     }
 
     /**
-     * Extract URLs and load to the frontier if not processed
+     * Extract URLs and load them to the frontier if not processed
      * 
      * @param string $url
      * @param Dom  $dom
@@ -72,6 +80,13 @@ class Crawler {
         }
     }
 
+    /**
+     * Detect if URL is processed and load them to the frontier if not
+     * 
+     * @param mixed $url
+     *
+     * @return Generator
+     */
     private function urlDetector(mixed $url) {
         if (!in_array($url, $this->processedUrls) && !in_array($url, $this->urlFrontier)) {
             array_push($this->urlFrontier, $url);
@@ -120,5 +135,5 @@ class Crawler {
 
 }
 
-$newCrawler = new Crawler(['https://www.imdb.com'], 4);
+$newCrawler = new Crawler(['https://www.imdb.com'], 10);
 $newCrawler->run();
