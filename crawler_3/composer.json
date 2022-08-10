@@ -1,0 +1,17 @@
+{
+    "name": "iamgideonidoko/crawler_3",
+    "autoload": {
+        "psr-4": {
+            "Iamgideonidoko\\Crawler3\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gideon Idoko",
+            "email": "iamgideonidoko@gmail.com"
+        }
+    ],
+    "require": {
+        "spatie/crawler": "^7.1"
+    }
+}
