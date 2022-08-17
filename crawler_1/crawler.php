@@ -73,8 +73,8 @@ class Crawler {
         $anchors = $dom->find('a');
         foreach ($anchors as $anchor) {
             $path = $anchor->getAttribute('href');
-            if (str_starts_with($path, '/')) {
-                $path = trim($url, '/').'/'.trim($path, '/');
+            if (isset($path) && gettype($path) == 'string' && str_starts_with($path, '/')) {
+                $path = explode('?', trim($url, '/').'/'.trim($path, '/'))[0];
             }
             yield $path;
         }
@@ -88,7 +88,7 @@ class Crawler {
      * @return Generator
      */
     private function urlDetector(mixed $url) {
-        if (!in_array($url, $this->processedUrls) && !in_array($url, $this->urlFrontier)) {
+        if (isset($url) && !in_array($url, $this->processedUrls) && !in_array($url, $this->urlFrontier)) {
             array_push($this->urlFrontier, $url);
         }
     }
